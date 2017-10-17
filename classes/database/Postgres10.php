@@ -1,15 +1,15 @@
 <?php
 
 /**
- * PostgreSQL 10.0 support
+ * PostgreSQL 10 support
  *
  */
 
 include_once('./classes/database/Postgres.php');
 
-class Postgres100 extends Postgres {
+class Postgres10 extends Postgres {
 
-	var $major_version = 10.0;
+	var $major_version = 10;
 
 	/**
 	 * Constructor
@@ -22,7 +22,7 @@ class Postgres100 extends Postgres {
 	// Help functions
 
 	function getHelpPages() {
-		include_once('./help/PostgresDoc100.php');
+		include_once('./help/PostgresDoc10.php');
 		return $this->help_page;
 	}
 

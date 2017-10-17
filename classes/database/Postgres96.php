@@ -5,9 +5,9 @@
  *
  */
 
-include_once('./classes/database/Postgres100.php');
+include_once('./classes/database/Postgres10.php');
 
-class Postgres96 extends Postgres100 {
+class Postgres96 extends Postgres10 {
 
 	var $major_version = 9.6;
 

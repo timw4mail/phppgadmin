@@ -20,7 +20,7 @@ class Connection {
 	 * @param $fetchMode Defaults to associative.  Override for different behaviour
 	 */
 	function __construct($host, $port, $sslmode, $user, $password, $database, $fetchMode = ADODB_FETCH_ASSOC) {
-		$this->conn = ADONewConnection('postgres7');
+		$this->conn = ADONewConnection('postgres');
 		$this->conn->setFetchMode($fetchMode);
 
 		// Ignore host if null
@@ -92,8 +92,8 @@ class Connection {
 		case '7.4': return 'Postgres74'; break;
 	    }
 
-	    switch (substr($version,0,4)) {
-		case '10.0': return 'Postgres100'; break;
+	    switch (substr($version,0,2)) {
+		case '10': return 'Postgres10'; break;
 	    }
 
 	    /* All <7.4 versions are not supported */

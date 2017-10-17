@@ -477,32 +477,32 @@
 			}
 
 			// Create the connection object and make the connection
-			$_connection = new Connection(
-				$server_info['host'],
-				$server_info['port'],
-				$server_info['sslmode'],
-				$server_info['username'],
-				$server_info['password'],
-				$database
-			);
-
-			// Get the name of the database driver we need to use.
-			// The description of the server is returned in $platform.
-			$_type = $_connection->getDriver($platform);
-			if ($_type === null) {
-				printf($lang['strpostgresqlversionnotsupported'], $postgresqlMinVer);
-				exit;
+		    $_connection = new Connection(
+			$server_info['host'],
+			$server_info['port'],
+			$server_info['sslmode'],
+			$server_info['username'],
+			$server_info['password'],
+			$database
+		    );
+		    
+		    // Get the name of the database driver we need to use.
+		    // The description of the server is returned in $platform.
+		    $_type = $_connection->getDriver($platform);
+		    if ($_type === null) {
+			    printf($lang['strpostgresqlversionnotsupported'], $postgresqlMinVer);
+			    exit;
 			}
-			$this->setServerInfo('platform', $platform, $server_id);
-			$this->setServerInfo('pgVersion', $_connection->conn->pgVersion, $server_id);
-
-			// Create a database wrapper class for easy manipulation of the
-			// connection.
-			include_once('./classes/database/' . $_type . '.php');
-			$data = new $_type($_connection->conn);
-			$data->platform = $_connection->platform;
-
-			/* we work on UTF-8 only encoding */
+		    $this->setServerInfo('platform', $platform, $server_id);
+		    $this->setServerInfo('pgVersion', $_connection->conn->pgVersion, $server_id);
+		    
+		    // Create a database wrapper class for easy manipulation of the
+		    // connection.
+		    include_once('./classes/database/' . $_type . '.php');
+		    $data = new $_type($_connection->conn);
+		    $data->platform = $_connection->platform;
+		    
+		    /* we work on UTF-8 only encoding */
 			$data->execute("SET client_encoding TO 'UTF-8'");
 
 			if ($data->hasByteaHexDefault()) {
